@@ -9,4 +9,4 @@ This is a repo created for the first assignment.
 
 ### PLOT OF ACCURACY vs NUMBER OF EPOCHS
 
-![]('figure1.png')
+![](Figure_1.png)
