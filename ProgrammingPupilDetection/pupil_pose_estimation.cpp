@@ -308,8 +308,8 @@ cout<<"Center of the 3-D circle (c): ("<<a<<" , "<<b<<" , "<<z_coordinate_ellips
 	normal_y=(b-sphere[1])/denominator;
 	normal_z=(z_coordinate_ellipse-sphere[2])/denominator;
 	cout<< "Normal of the 3-D circle (n): ("<<normal_x<<" i, "<<normal_y<<" j, "<<normal_z<<" k) "<<endl;
-     imshow( "projected image", drawing );
-
+    imshow( "projected image", drawing );
+    imwrite("projected_image.png",drawing);
 	///imshow("image", binary);
 	imshow("original",src);
 	waitKey(0);

@@ -80,6 +80,7 @@ int main(int argc, char** argv)
 
 	///imshow("image", binary);
 	imshow("original",src);
+	imwrite("contour.png",drawing);
 	waitKey(0);
 
 	return 0;
