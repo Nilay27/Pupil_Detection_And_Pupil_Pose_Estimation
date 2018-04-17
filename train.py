@@ -24,7 +24,7 @@ x = tf.placeholder('float', [None, 24, 24])
 y = tf.placeholder('float')
 
 keep_rate = 0.8
-hm_epochs = 1
+hm_epochs = 100
 
 def conv2d(x, W):
 	return tf.nn.conv2d(x, W, strides=[1,1,1,1], padding='SAME')
@@ -76,15 +76,7 @@ def convolutional_neural_network(x):
 
 	return output
 
-def flip_image(x):
-	shape = [24, 24,1]
-	x = tf.placeholder(dtype = tf.float32, shape = shape)
-	flip_2 = tf.image.flip_up_down(x)
-	flip_3 = tf.image.flip_left_right(x)
-	flip_4 = tf.image.random_flip_up_down(x)
-	flip_5 = tf.image.random_flip_left_right(x)
 
-	return np.stack([flip_2,flip_3,flip_4,flip_5])
 
 def train_neural_network(x):
 	output = convolutional_neural_network(x)
@@ -106,10 +98,8 @@ def train_neural_network(x):
 		
 
 		imgs_open = np.stack([open_image(fn) for fn in open_eye])
-		for i in range(len(imgs_open)):
-			imgs_open=np.stack(flip_image([imgs_open[i,:,:]]))
 		
-		print type(imgs_open)
+		#print type(imgs_open)
 		labels_open=np.zeros(shape=(len(imgs_open),2))
 		print labels_open.shape
 		for i in range((len(imgs_open))):

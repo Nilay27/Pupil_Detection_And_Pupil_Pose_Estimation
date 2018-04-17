@@ -91,4 +91,7 @@ with tf.Session() as sess:
 		else:
 			list_prediction.append(1)
 
+
+
 	print list_prediction
+	print sum(list_prediction), len(list_prediction)
