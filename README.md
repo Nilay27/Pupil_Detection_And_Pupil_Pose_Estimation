@@ -25,6 +25,9 @@ To run the file, use the command:-
 
 ./pupil_detection
 
+#### Input and output images
+<img src="ProgrammingPupilDetection/TestData/Real/01.jpg" width="240"> <img src="ProgrammingPupilDetection/contour.png" width="240">
+
 
 ### Pupil_pose_estimation
 
@@ -38,3 +41,6 @@ g++ pupil_pose_estimation.cpp `pkg-config --cflags --libs opencv` -o pupil_pose_
 To run the file, use the command:-
 
 ./pupil_pose_extimation
+
+#### Input and output images
+<img src="ProgrammingPupilDetection/TestData/Synthetic/01.png" width="240"> <img src="ProgrammingPupilDetection/projected_image.png" width="240">
