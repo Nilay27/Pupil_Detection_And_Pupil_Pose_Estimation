@@ -94,4 +94,4 @@ with tf.Session() as sess:
 
 
 	print list_prediction
-	print sum(list_prediction), len(list_prediction)
+	
