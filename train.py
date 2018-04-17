@@ -1,6 +1,5 @@
 import tensorflow as tf
 import os
-import h5py
 import numpy as np
 import time
 import glob
@@ -10,7 +9,6 @@ from random import shuffle
 import matplotlib.pyplot as plt 
 import pickle
 
-
 close_left_eye=glob.glob('dataset_B_Eye_Images/closedLeftEyes/*.jpg')
 close_right_eye=glob.glob('dataset_B_Eye_Images/closedRightEyes/*.jpg')
 open_left_eye=glob.glob('dataset_B_Eye_Images/openLeftEyes/*.jpg')
@@ -19,7 +17,6 @@ open_right_eye=glob.glob('dataset_B_Eye_Images/openRightEyes/*.jpg')
 close_eye=close_left_eye+close_right_eye
 open_eye=open_left_eye+open_right_eye
 
-
 n_classes = 2 
 batch_size = 32
 
@@ -27,7 +24,7 @@ x = tf.placeholder('float', [None, 24, 24])
 y = tf.placeholder('float')
 
 keep_rate = 0.8
-hm_epochs = 100
+hm_epochs = 1
 
 def conv2d(x, W):
 	return tf.nn.conv2d(x, W, strides=[1,1,1,1], padding='SAME')
@@ -79,6 +76,16 @@ def convolutional_neural_network(x):
 
 	return output
 
+def flip_image(x):
+	shape = [24, 24,1]
+	x = tf.placeholder(dtype = tf.float32, shape = shape)
+	flip_2 = tf.image.flip_up_down(x)
+	flip_3 = tf.image.flip_left_right(x)
+	flip_4 = tf.image.random_flip_up_down(x)
+	flip_5 = tf.image.random_flip_left_right(x)
+
+	return np.stack([flip_2,flip_3,flip_4,flip_5])
+
 def train_neural_network(x):
 	output = convolutional_neural_network(x)
 	prediction = tf.nn.softmax(output)
@@ -99,10 +106,13 @@ def train_neural_network(x):
 		
 
 		imgs_open = np.stack([open_image(fn) for fn in open_eye])
-		print imgs_open.shape
+		for i in range(len(imgs_open)):
+			imgs_open=np.stack(flip_image([imgs_open[i,:,:]]))
+		
+		print type(imgs_open)
 		labels_open=np.zeros(shape=(len(imgs_open),2))
 		print labels_open.shape
-		for i in range (len(imgs_open)):
+		for i in range((len(imgs_open))):
 			labels_open[i][1]=1
 		imgs = np.concatenate((imgs_close,imgs_open))
 		print imgs.shape
